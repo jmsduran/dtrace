@@ -1,6 +1,47 @@
+# dtrace - Python ray tracer
+# Copyright (C) 2020 James Duran
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 from tuple import is_point
 from tuple import is_vector
 from tuple import Tuple
+
+
+def test_tuple_equals():
+    a = Tuple(2, 3, 1, 1)
+    b = Tuple(2, 3, 1.000009, 1)
+
+    assert a.equals(b)
+
+def test_tuple_equals_override_epsilon():
+    a = Tuple(2, 3, 1, 0)
+    b = Tuple(2, 3, 1, 0)
+
+    assert a.equals(b, epsilon=0)
+
+def test_tuple_not_equals():
+    a = Tuple(2, 3, 1, 1)
+    b = Tuple(2, 3.00001, 1, 1)
+
+    assert not a.equals(b)
+
+def test_tuple_not_equals_override_epsilon():
+    a = Tuple(2, 3, 1, 0)
+    b = Tuple(2.000009, 3, 1, 0)
+
+    assert not a.equals(b, epsilon=0)
 
 def test_tuple_point_float():
     t = Tuple(4.3, -4.2, 3.1, 1.0)

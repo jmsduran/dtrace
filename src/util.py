@@ -16,6 +16,7 @@
 
 def equals(a, b, **kwargs):
     epsilon = kwargs.get('epsilon', .00001)
+    diff = abs(a - b)
 
-    return True if abs(a - b) < epsilon else False
+    return True if (diff < epsilon or diff == 0) else False
 
