@@ -14,8 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from tuple import is_point
-from tuple import is_vector
 from tuple import Tuple
 
 
@@ -55,8 +53,8 @@ def test_tuple_point_float():
     assert t.z == 3.1
     assert t.w == 1.0
 
-    assert is_point(t)
-    assert not is_vector(t)
+    assert t.is_point()
+    assert not t.is_vector()
 
 
 def test_tuple_point_int():
@@ -67,8 +65,8 @@ def test_tuple_point_int():
     assert t.z == 3
     assert t.w == 1
 
-    assert is_point(t)
-    assert not is_vector(t)
+    assert t.is_point()
+    assert not t.is_vector()
 
 
 def test_tuple_vector_float():
@@ -79,8 +77,8 @@ def test_tuple_vector_float():
     assert t.z == 3.1
     assert t.w == 0.0
 
-    assert not is_point(t)
-    assert is_vector(t)
+    assert not t.is_point()
+    assert t.is_vector()
 
 
 def test_tuple_vector_int():
@@ -91,5 +89,5 @@ def test_tuple_vector_int():
     assert t.z == 3
     assert t.w == 0
 
-    assert not is_point(t)
-    assert is_vector(t)
+    assert not t.is_point()
+    assert t.is_vector()
