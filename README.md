@@ -1,3 +1,5 @@
+![Python application](https://github.com/jmsduran/dtrace/workflows/Python%20application/badge.svg)
+
 # dtrace
 Python raytracer
 
