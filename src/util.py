@@ -20,4 +20,3 @@ def equals(a, b, **kwargs):
     diff = abs(a - b)
 
     return True if (diff < epsilon or diff == 0) else False
-

@@ -25,11 +25,13 @@ def test_tuple_equals():
 
     assert a.equals(b)
 
+
 def test_tuple_equals_override_epsilon():
     a = Tuple(2, 3, 1, 0)
     b = Tuple(2, 3, 1, 0)
 
     assert a.equals(b, epsilon=0)
+
 
 def test_tuple_not_equals():
     a = Tuple(2, 3, 1, 1)
@@ -37,15 +39,17 @@ def test_tuple_not_equals():
 
     assert not a.equals(b)
 
+
 def test_tuple_not_equals_override_epsilon():
     a = Tuple(2, 3, 1, 0)
     b = Tuple(2.000009, 3, 1, 0)
 
     assert not a.equals(b, epsilon=0)
 
+
 def test_tuple_point_float():
     t = Tuple(4.3, -4.2, 3.1, 1.0)
-    
+
     assert t.x == 4.3
     assert t.y == -4.2
     assert t.z == 3.1
@@ -53,6 +57,7 @@ def test_tuple_point_float():
 
     assert is_point(t)
     assert not is_vector(t)
+
 
 def test_tuple_point_int():
     t = Tuple(4, -4, 3, 1)
@@ -65,6 +70,7 @@ def test_tuple_point_int():
     assert is_point(t)
     assert not is_vector(t)
 
+
 def test_tuple_vector_float():
     t = Tuple(4.3, -4.2, 3.1, 0.0)
 
@@ -76,6 +82,7 @@ def test_tuple_vector_float():
     assert not is_point(t)
     assert is_vector(t)
 
+
 def test_tuple_vector_int():
     t = Tuple(4, -4, 3, 0)
 
@@ -86,4 +93,3 @@ def test_tuple_vector_int():
 
     assert not is_point(t)
     assert is_vector(t)
-

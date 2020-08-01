@@ -34,8 +34,10 @@ class Tuple:
 
         return (is_x_equal and is_y_equal and is_z_equal and is_w_equal)
 
+
 def is_point(t):
     return True if t.w else False
+
 
 def is_vector(t):
     return True if not t.w else False
