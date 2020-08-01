@@ -29,6 +29,12 @@ def test_equals_override_epsilon():
 
     assert equals(a, b, epsilon=.002)
 
+def test_equals_override_epsilon_zero():
+    a = 1
+    b = 1
+
+    assert equals(a, b, epsilon=0)
+
 def test_not_equals():
     a = 1.00001
     b = 1
