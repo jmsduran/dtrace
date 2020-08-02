@@ -24,12 +24,38 @@ def test_tuple_add():
     assert (a + b) == Tuple(1, 1, 6, 1)
 
 
+def test_tuple_div():
+    a = Tuple(1, 2, 3, 4)
+    b = Tuple(2, 3, 4, 5)
+
+    assert (a / b) is None
+
+
+def test_tuple_mult():
+    a = Tuple(1, 2, 3, 4)
+    b = Tuple(2, 3, 4, 5)
+
+    assert (a * b) is None
+
+
 def test_tuple_negate():
     a = Tuple(1, -2, 3, -4)
     expected = Tuple(-1, 2, -3, 4)
 
     assert -a == expected
     assert a.negate() == expected
+
+
+def test_tuple_scalar_mult():
+    a = Tuple(1, -2, 3, -4)
+
+    assert a * 3.5 == Tuple(3.5, -7, 10.5, -14)
+
+
+def test_tuple_scalar_div():
+    a = Tuple(1, -2, 3, -4)
+
+    assert a / 2 == Tuple(0.5, -1, 1.5, -2)
 
 
 def test_tuple_subtract_points():

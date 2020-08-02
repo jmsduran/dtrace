@@ -35,6 +35,18 @@ class Tuple:
     def __eq__(self, other):
         return self.equals(other)
 
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            x = self.x * other
+            y = self.y * other
+            z = self.z * other
+            w = self.w * other
+
+            return Tuple(x, y, z, w)
+
+        else:
+            return None
+
     def __ne__(self, other):
         return not self.equals(other)
 
@@ -48,6 +60,18 @@ class Tuple:
         w = self.w - other.w
 
         return Tuple(x, y, z, w)
+
+    def __truediv__(self, other):
+        if isinstance(other, (int, float)):
+            x = self.x / other
+            y = self.y / other
+            z = self.z / other
+            w = self.w / other
+
+            return Tuple(x, y, z, w)
+
+        else:
+            return None
 
     def equals(self, t, **kwargs):
         epsilon = kwargs.get('epsilon', .00001)
