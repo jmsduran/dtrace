@@ -38,6 +38,14 @@ class Tuple:
     def __ne__(self, other):
         return not self.equals(other)
 
+    def __sub__(self, other):
+        x = self.x - other.x
+        y = self.y - other.y
+        z = self.z - other.z
+        w = self.w - other.w
+
+        return Tuple(x, y, z, w)
+
     def equals(self, t, **kwargs):
         epsilon = kwargs.get('epsilon', .00001)
 

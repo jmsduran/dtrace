@@ -24,6 +24,36 @@ def test_tuple_add():
     assert (a + b) == Tuple(1, 1, 6, 1)
 
 
+def test_tuple_subtract_points():
+    a = Tuple(3, 2, 1, 1)
+    b = Tuple(5, 6, 7, 1)
+
+    c = a - b
+
+    assert c.is_vector()
+    assert c == Tuple(-2, -4, -6, 0)
+
+
+def test_tuple_subtract_vector_from_point():
+    a = Tuple(3, 2, 1, 1)
+    b = Tuple(5, 6, 7, 0)
+
+    c = a - b
+
+    assert c.is_point()
+    assert c == Tuple(-2, -4, -6, 1)
+
+
+def test_tuple_subtract_vectors():
+    a = Tuple(3, 2, 1, 0)
+    b = Tuple(5, 6, 7, 0)
+
+    c = a - b
+
+    assert c.is_vector()
+    assert c == Tuple(-2, -4, -6, 0)
+
+
 def test_tuple_equals():
     a = Tuple(2, 3, 1, 1)
     b = Tuple(2, 3, 1.000009, 1)
