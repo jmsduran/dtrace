@@ -131,6 +131,20 @@ def test_tuple_magnitude():
     assert e.magnitude() == sqrt(14)
 
 
+def test_tuple_normalize():
+    a = Tuple(4, 0, 0, 0)
+
+    assert a.is_vector()
+    assert a.normalize() == Tuple(1, 0, 0, 0)
+
+    b = Tuple(1, 2, 3, 0)
+    b_normalize = b.normalize()
+
+    assert b.is_vector()
+    assert b_normalize == Tuple(0.26726, 0.53452, 0.80178, 0)
+    assert b_normalize.magnitude() == 1
+
+
 def test_tuple_not_equals():
     a = Tuple(2, 3, 1, 1)
     b = Tuple(2, 3.00001, 1, 1)

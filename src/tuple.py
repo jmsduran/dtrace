@@ -106,5 +106,10 @@ class Tuple:
 
         return sqrt(x_sq + y_sq + z_sq + w_sq)
 
+    def normalize(self):
+        magnitude = self.magnitude()
+
+        return self / magnitude
+
     def negate(self):
         return Tuple(0, 0, 0, 0) - self
