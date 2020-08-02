@@ -89,6 +89,13 @@ def test_tuple_subtract_vectors():
     assert c == Tuple(-2, -4, -6, 0)
 
 
+def test_tuple_dot_product():
+    a = Tuple(1, 2, 3, 0)
+    b = Tuple(2, 3, 4, 0)
+
+    assert a.dot_product(b) == 20
+
+
 def test_tuple_equals():
     a = Tuple(2, 3, 1, 1)
     b = Tuple(2, 3, 1.000009, 1)

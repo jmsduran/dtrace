@@ -82,6 +82,9 @@ class Tuple:
         else:
             return None
 
+    def dot_product(self, t):
+        return self.x * t.x + self.y * t.y + self.z * t.z + self.w * t.w
+
     def equals(self, t, **kwargs):
         epsilon = kwargs.get('epsilon', .00001)
 
