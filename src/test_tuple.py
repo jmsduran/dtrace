@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from math import sqrt
 from tuple import Tuple
 
 
@@ -101,6 +102,33 @@ def test_tuple_equals_override_epsilon():
     b = Tuple(2, 3, 1, 0)
 
     assert a.equals(b, epsilon=0)
+
+
+def test_tuple_magnitude():
+    a = Tuple(1, 0, 0, 0)
+
+    assert a.is_vector()
+    assert a.magnitude() == 1
+
+    b = Tuple(0, 1, 0, 0)
+
+    assert b.is_vector()
+    assert b.magnitude() == 1
+
+    c = Tuple(0, 0, 1, 0)
+
+    assert c.is_vector()
+    assert c.magnitude() == 1
+
+    d = Tuple(1, 2, 3, 0)
+
+    assert d.is_vector()
+    assert d.magnitude() == sqrt(14)
+
+    e = Tuple(-1, -2, -3, 0)
+
+    assert e.is_vector()
+    assert e.magnitude() == sqrt(14)
 
 
 def test_tuple_not_equals():

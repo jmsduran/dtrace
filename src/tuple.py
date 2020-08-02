@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from math import sqrt
 from util import equals
 
 
@@ -33,7 +34,11 @@ class Tuple:
         return Tuple(x, y, z, w)
 
     def __eq__(self, other):
-        return self.equals(other)
+        if isinstance(other, Tuple):
+            return self.equals(other)
+
+        else:
+            return False
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
@@ -48,7 +53,11 @@ class Tuple:
             return None
 
     def __ne__(self, other):
-        return not self.equals(other)
+        if isinstance(other, Tuple):
+            return not self.equals(other)
+
+        else:
+            return True
 
     def __neg__(self):
         return self.negate()
@@ -88,6 +97,14 @@ class Tuple:
 
     def is_vector(self):
         return True if equals(self.w, 0) else False
+
+    def magnitude(self):
+        x_sq = self.x ** 2
+        y_sq = self.y ** 2
+        z_sq = self.z ** 2
+        w_sq = self.w ** 2
+
+        return sqrt(x_sq + y_sq + z_sq + w_sq)
 
     def negate(self):
         return Tuple(0, 0, 0, 0) - self
