@@ -24,6 +24,14 @@ def test_tuple_add():
     assert (a + b) == Tuple(1, 1, 6, 1)
 
 
+def test_tuple_negate():
+    a = Tuple(1, -2, 3, -4)
+    expected = Tuple(-1, 2, -3, 4)
+
+    assert -a == expected
+    assert a.negate() == expected
+
+
 def test_tuple_subtract_points():
     a = Tuple(3, 2, 1, 1)
     b = Tuple(5, 6, 7, 1)

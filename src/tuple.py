@@ -38,6 +38,9 @@ class Tuple:
     def __ne__(self, other):
         return not self.equals(other)
 
+    def __neg__(self):
+        return self.negate()
+
     def __sub__(self, other):
         x = self.x - other.x
         y = self.y - other.y
@@ -61,3 +64,6 @@ class Tuple:
 
     def is_vector(self):
         return True if equals(self.w, 0) else False
+
+    def negate(self):
+        return Tuple(0, 0, 0, 0) - self
