@@ -82,6 +82,11 @@ class Tuple:
         else:
             return None
 
+    def cross_product(self, t):
+        return Tuple(self.y * t.z - self.z * t.y,
+                     self.z * t.x - self.x * t.z,
+                     self.x * t.y - self.y * t.x, 0)
+
     def dot_product(self, t):
         return self.x * t.x + self.y * t.y + self.z * t.z + self.w * t.w
 

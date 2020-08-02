@@ -89,6 +89,14 @@ def test_tuple_subtract_vectors():
     assert c == Tuple(-2, -4, -6, 0)
 
 
+def test_tuple_cross_product():
+    a = Tuple(1, 2, 3, 0)
+    b = Tuple(2, 3, 4, 0)
+
+    assert a.cross_product(b) == Tuple(-1, 2, -1, 0)
+    assert b.cross_product(a) == Tuple(1, -2, 1, 0)
+
+
 def test_tuple_dot_product():
     a = Tuple(1, 2, 3, 0)
     b = Tuple(2, 3, 4, 0)
