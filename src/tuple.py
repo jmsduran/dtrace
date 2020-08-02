@@ -24,6 +24,20 @@ class Tuple:
         self.z = z
         self.w = w
 
+    def __add__(self, other):
+        x = self.x + other.x
+        y = self.y + other.y
+        z = self.z + other.z
+        w = self.w + other.w
+
+        return Tuple(x, y, z, w)
+
+    def __eq__(self, other):
+        return self.equals(other)
+
+    def __ne__(self, other):
+        return not self.equals(other)
+
     def equals(self, t, **kwargs):
         epsilon = kwargs.get('epsilon', .00001)
 

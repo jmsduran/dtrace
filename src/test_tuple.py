@@ -17,11 +17,19 @@
 from tuple import Tuple
 
 
+def test_tuple_add():
+    a = Tuple(3, -2, 5, 1)
+    b = Tuple(-2, 3, 1, 0)
+
+    assert (a + b) == Tuple(1, 1, 6, 1)
+
+
 def test_tuple_equals():
     a = Tuple(2, 3, 1, 1)
     b = Tuple(2, 3, 1.000009, 1)
 
     assert a.equals(b)
+    assert a == b
 
 
 def test_tuple_equals_override_epsilon():
@@ -36,6 +44,7 @@ def test_tuple_not_equals():
     b = Tuple(2, 3.00001, 1, 1)
 
     assert not a.equals(b)
+    assert a != b
 
 
 def test_tuple_not_equals_override_epsilon():
