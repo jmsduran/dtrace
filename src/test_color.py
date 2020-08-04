@@ -33,6 +33,13 @@ def test_add():
     assert (a + b) == c
 
 
+def test_equals():
+    a = Color(1, 1, 1)
+    b = Color(0.99999, 0.99999, 0.99999)
+
+    assert a == b
+
+
 def test_subtract():
     a = Color(0.9, 0.6, 0.75)
     b = Color(0.7, 0.1, 0.25)
