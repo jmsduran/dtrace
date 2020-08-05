@@ -54,7 +54,7 @@ class Color:
 
     def __ne__(self, other):
         if isinstance(other, Color):
-            return not self.equals(other)
+            return self.__eq__(other)
 
         else:
             return True

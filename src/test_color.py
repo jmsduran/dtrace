@@ -36,8 +36,19 @@ def test_add():
 def test_equals():
     a = Color(1, 1, 1)
     b = Color(0.99999, 0.99999, 0.99999)
+    c = Color(0.99998, 0.99998, 0.99998)
 
     assert a == b
+    assert not (a == 2)
+    assert a != c
+
+
+def test_not_equals():
+    a = Color(1, 1, 1)
+    b = Color(0, 0, 0)
+
+    assert a != b
+    assert a != 2
 
 
 def test_subtract():
