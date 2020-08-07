@@ -35,11 +35,10 @@ class Color:
             return None
 
     def __eq__(self, other):
-        if isinstance(other, Color):
-            return self.equals(other)
+        if not isinstance(other, Color):
+            return NotImplemented
 
-        else:
-            return False
+        return self.equals(other)
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
@@ -53,11 +52,7 @@ class Color:
             return None
 
     def __ne__(self, other):
-        if isinstance(other, Color):
-            return self.__eq__(other)
-
-        else:
-            return True
+        return not self == other
 
     def __sub__(self, other):
         if isinstance(other, Color):
@@ -77,4 +72,4 @@ class Color:
         is_g_eq = equals(self.green, c.green, epsilon=epsilon)
         is_b_eq = equals(self.blue, c.blue, epsilon=epsilon)
 
-        return (is_r_eq, is_g_eq, is_b_eq)
+        return (is_r_eq and is_g_eq and is_b_eq)
