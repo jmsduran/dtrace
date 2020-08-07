@@ -34,11 +34,10 @@ class Tuple:
         return Tuple(x, y, z, w)
 
     def __eq__(self, other):
-        if isinstance(other, Tuple):
-            return self.equals(other)
+        if not isinstance(other, Tuple):
+            return NotImplemented
 
-        else:
-            return False
+        return self.equals(other)
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
@@ -53,11 +52,7 @@ class Tuple:
             return None
 
     def __ne__(self, other):
-        if isinstance(other, Tuple):
-            return not self.equals(other)
-
-        else:
-            return True
+        return not self == other
 
     def __neg__(self):
         return self.negate()

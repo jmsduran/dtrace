@@ -107,9 +107,12 @@ def test_tuple_dot_product():
 def test_tuple_equals():
     a = Tuple(2, 3, 1, 1)
     b = Tuple(2, 3, 1.000009, 1)
+    c = Tuple(0, 0, 0, 0)
 
     assert a.equals(b)
     assert a == b
+    assert a != 2
+    assert a != c
 
 
 def test_tuple_equals_override_epsilon():
