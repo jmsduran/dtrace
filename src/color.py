@@ -48,8 +48,15 @@ class Color:
 
             return Color(red, green, blue)
 
+        elif isinstance(other, Color):
+            red = self.red * other.red
+            green = self.green * other.green
+            blue = self.blue * other.blue
+
+            return Color(red, green, blue)
+
         else:
-            return None
+            return NotImplemented
 
     def __ne__(self, other):
         return not self == other

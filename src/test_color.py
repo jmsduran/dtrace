@@ -62,5 +62,8 @@ def test_subtract():
 def test_multiply():
     a = Color(0.2, 0.3, 0.4)
     b = Color(0.4, 0.6, 0.8)
+    c = Color(1, 0.2, 0.4)
+    d = Color(0.9, 1, 0.1)
 
     assert (a * 2) == b
+    assert (c * d) == Color(0.9, 0.2, 0.04)
