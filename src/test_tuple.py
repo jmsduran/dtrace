@@ -18,28 +18,28 @@ from math import sqrt
 from tuple import Tuple
 
 
-def test_tuple_add():
+def test_add():
     a = Tuple(3, -2, 5, 1)
     b = Tuple(-2, 3, 1, 0)
 
     assert (a + b) == Tuple(1, 1, 6, 1)
 
 
-def test_tuple_div():
+def test_div():
     a = Tuple(1, 2, 3, 4)
     b = Tuple(2, 3, 4, 5)
 
     assert (a / b) is None
 
 
-def test_tuple_mult():
+def test_mult():
     a = Tuple(1, 2, 3, 4)
     b = Tuple(2, 3, 4, 5)
 
     assert (a * b) is None
 
 
-def test_tuple_negate():
+def test_negate():
     a = Tuple(1, -2, 3, -4)
     expected = Tuple(-1, 2, -3, 4)
 
@@ -47,19 +47,19 @@ def test_tuple_negate():
     assert a.negate() == expected
 
 
-def test_tuple_scalar_mult():
+def test_scalar_mult():
     a = Tuple(1, -2, 3, -4)
 
     assert a * 3.5 == Tuple(3.5, -7, 10.5, -14)
 
 
-def test_tuple_scalar_div():
+def test_scalar_div():
     a = Tuple(1, -2, 3, -4)
 
     assert a / 2 == Tuple(0.5, -1, 1.5, -2)
 
 
-def test_tuple_subtract_points():
+def test_subtract_points():
     a = Tuple(3, 2, 1, 1)
     b = Tuple(5, 6, 7, 1)
 
@@ -69,7 +69,7 @@ def test_tuple_subtract_points():
     assert c == Tuple(-2, -4, -6, 0)
 
 
-def test_tuple_subtract_vector_from_point():
+def test_subtract_vector_from_point():
     a = Tuple(3, 2, 1, 1)
     b = Tuple(5, 6, 7, 0)
 
@@ -79,7 +79,7 @@ def test_tuple_subtract_vector_from_point():
     assert c == Tuple(-2, -4, -6, 1)
 
 
-def test_tuple_subtract_vectors():
+def test_subtract_vectors():
     a = Tuple(3, 2, 1, 0)
     b = Tuple(5, 6, 7, 0)
 
@@ -89,7 +89,7 @@ def test_tuple_subtract_vectors():
     assert c == Tuple(-2, -4, -6, 0)
 
 
-def test_tuple_cross_product():
+def test_cross_product():
     a = Tuple(1, 2, 3, 0)
     b = Tuple(2, 3, 4, 0)
 
@@ -97,14 +97,14 @@ def test_tuple_cross_product():
     assert b.cross_product(a) == Tuple(1, -2, 1, 0)
 
 
-def test_tuple_dot_product():
+def test_dot_product():
     a = Tuple(1, 2, 3, 0)
     b = Tuple(2, 3, 4, 0)
 
     assert a.dot_product(b) == 20
 
 
-def test_tuple_equals():
+def test_equals():
     a = Tuple(2, 3, 1, 1)
     b = Tuple(2, 3, 1.000009, 1)
     c = Tuple(0, 0, 0, 0)
@@ -115,14 +115,14 @@ def test_tuple_equals():
     assert a != c
 
 
-def test_tuple_equals_override_epsilon():
+def test_equals_override_epsilon():
     a = Tuple(2, 3, 1, 0)
     b = Tuple(2, 3, 1, 0)
 
     assert a.equals(b, epsilon=0)
 
 
-def test_tuple_magnitude():
+def test_magnitude():
     a = Tuple(1, 0, 0, 0)
 
     assert a.is_vector()
@@ -149,7 +149,7 @@ def test_tuple_magnitude():
     assert e.magnitude() == sqrt(14)
 
 
-def test_tuple_normalize():
+def test_normalize():
     a = Tuple(4, 0, 0, 0)
 
     assert a.is_vector()
@@ -163,7 +163,7 @@ def test_tuple_normalize():
     assert b_normalize.magnitude() == 1
 
 
-def test_tuple_not_equals():
+def test_not_equals():
     a = Tuple(2, 3, 1, 1)
     b = Tuple(2, 3.00001, 1, 1)
 
@@ -171,14 +171,14 @@ def test_tuple_not_equals():
     assert a != b
 
 
-def test_tuple_not_equals_override_epsilon():
+def test_not_equals_override_epsilon():
     a = Tuple(2, 3, 1, 0)
     b = Tuple(2.000009, 3, 1, 0)
 
     assert not a.equals(b, epsilon=0)
 
 
-def test_tuple_point_float():
+def test_point_float():
     t = Tuple(4.3, -4.2, 3.1, 1.0)
 
     assert t.x == 4.3
@@ -190,7 +190,7 @@ def test_tuple_point_float():
     assert not t.is_vector()
 
 
-def test_tuple_point_int():
+def test_point_int():
     t = Tuple(4, -4, 3, 1)
 
     assert t.x == 4
@@ -202,7 +202,7 @@ def test_tuple_point_int():
     assert not t.is_vector()
 
 
-def test_tuple_vector_float():
+def test_vector_float():
     t = Tuple(4.3, -4.2, 3.1, 0.0)
 
     assert t.x == 4.3
@@ -214,7 +214,7 @@ def test_tuple_vector_float():
     assert t.is_vector()
 
 
-def test_tuple_vector_int():
+def test_vector_int():
     t = Tuple(4, -4, 3, 0)
 
     assert t.x == 4
