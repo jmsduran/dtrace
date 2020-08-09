@@ -4,16 +4,21 @@
 Python ray tracer.
 
 ## Build & Test
-To setup, from the project's root directory:
+
+If venv is not installed:
 ```
 sudo apt-get install python3-venv
-python3 -m venv dtrace-env
-source dtrace-env/bin/activate
-pip install -r requirements.txt
+```
+
+To setup, from the project's root directory:
+```
+python3 -m venv env
+source env/bin/activate
+python3 -m pip install -r requirements.txt
 ```
 
 To run tests and linter, from project's root directory:
 ```
 pytest
-flake8 ./
+flake8 src/
 ```
