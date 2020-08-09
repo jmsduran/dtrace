@@ -25,6 +25,8 @@ class Canvas:
 
         for x in range(self.width):
             self.pixels.append([])
+
+            # pylint: disable=unused-variable
             for y in range(self.height):
                 self.pixels[x].append(Color(0, 0, 0))
 
