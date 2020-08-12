@@ -18,17 +18,24 @@ from color import Color
 
 
 class Canvas:
-    def __init__(self, width, height):
+    def __init__(self, width, height, **kwargs):
+        fill_color = kwargs.get('fill_color', Color(0, 0, 0))
+
         self.width = width
         self.height = height
         self.pixels = []
+
+        self.ppm_str = """P3
+{0} {1}
+255
+""".format(self.width, self.height)
 
         for x in range(self.width):
             self.pixels.append([])
 
             # pylint: disable=unused-variable
             for y in range(self.height):
-                self.pixels[x].append(Color(0, 0, 0))
+                self.pixels[x].append(fill_color)
 
     def _validate_pixel_range(self, x, y):
         if not ((0 <= x < self.width) and (0 <= y < self.height)):
@@ -38,6 +45,12 @@ class Canvas:
         self._validate_pixel_range(x, y)
 
         return self.pixels[x][y]
+
+    def to_ppm_str(self):
+        return self.ppm_str
+
+    def to_ppm(self):
+        return NotImplemented
 
     def write_pixel(self, x, y, color):
         self._validate_pixel_range(x, y)

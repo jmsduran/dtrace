@@ -32,12 +32,83 @@ def test_create():
             assert c.pixel_at(x, y) == color_black
 
 
+def test_create_fill_color():
+    color_green = Color(0, 1, 0)
+    c = Canvas(10, 20, fill_color=color_green)
+
+    assert c is not None
+    assert c.width == 10
+    assert c.height == 20
+
+    for x in range(c.width):
+        for y in range(c.height):
+            assert c.pixel_at(x, y) == color_green
+
+
 def test_read_write_pixel():
     c = Canvas(10, 20)
     color_red = Color(1, 0, 0)
     c.write_pixel(2, 3, color_red)
 
     assert c.pixel_at(2, 3) == color_red
+
+
+def test_to_ppm_str_eof():
+    c = Canvas(5, 3)
+    ppm_str = c.to_ppm_str()
+
+    assert ppm_str[-1] == '\n'
+
+
+def test_to_ppm_str_metadata():
+    c = Canvas(5, 3)
+
+    ppm_str = c.to_ppm_str()
+    ppm_str_list = ppm_str.splitlines()
+
+    expected_str_list = """P3
+5 3
+255
+""".splitlines()
+
+    for i in range(3):
+        assert ppm_str_list[i] == expected_str_list[i]
+
+
+@pytest.mark.skip(reason="Not implemented yet")
+def test_to_ppm_str_long_lines():
+    c = Canvas(10, 2, fill_color=Color(1, 0.8, 0.6))
+
+    ppm_str = c.to_ppm_str()
+    ppm_str_list = ppm_str.splitlines()
+
+    expected_str_list = """255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204​
+153 255 204 153 255 204 153 255 204 153 255 204 153​
+255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204​
+153 255 204 153 255 204 153 255 204 153 255 204 153
+""".splitlines()
+
+    for i in range(3, 7):
+        assert ppm_str_list[i] == expected_str_list[i - 3]
+
+
+@pytest.mark.skip(reason="Not implemented yet")
+def test_to_ppm_str_pixels():
+    c = Canvas(5, 3)
+    c.write_pixel(0, 0, Color(1.5, 0, 0))
+    c.write_pixel(2, 1, Color(0, 0.5, 0))
+    c.write_pixel(4, 2, Color(-0.5, 0, 1))
+
+    ppm_str = c.to_ppm_str()
+    ppm_str_list = ppm_str.splitlines()
+
+    expected_str_list = """255 0 0 0 0 0 0 0 0 0 0 0 0 0 0​
+​0 0 0 0 0 0 0 128 0 0 0 0 0 0 0​
+​0 0 0 0 0 0 0 0 0 0 0 0 0 0 255
+""".splitlines()
+
+    for i in range(3, 6):
+        assert ppm_str_list[i] == expected_str_list[i - 3]
 
 
 def test_out_of_bounds_errors():
