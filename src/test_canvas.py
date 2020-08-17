@@ -57,6 +57,7 @@ def test_to_ppm_str_eof():
     c = Canvas(5, 3)
     ppm_str = c.to_ppm_str()
 
+    print(ppm_str)
     assert ppm_str[-1] == '\n'
 
 
@@ -89,10 +90,12 @@ def test_to_ppm_str_long_lines():
 """.splitlines()
 
     for i in range(3, 7):
+        print('Line {0} actual: \'{1}\' '.format(i, ppm_str_list[i]))
+        print('Line {0} expect: \'{1}\' '.format(i, expected_str_list[i - 3]))
+
         assert ppm_str_list[i] == expected_str_list[i - 3]
 
 
-@pytest.mark.skip(reason="Not implemented yet")
 def test_to_ppm_str_pixels():
     c = Canvas(5, 3)
     c.write_pixel(0, 0, Color(1.5, 0, 0))
@@ -102,10 +105,10 @@ def test_to_ppm_str_pixels():
     ppm_str = c.to_ppm_str()
     ppm_str_list = ppm_str.splitlines()
 
-    expected_str_list = """255 0 0 0 0 0 0 0 0 0 0 0 0 0 0​
-​0 0 0 0 0 0 0 128 0 0 0 0 0 0 0​
-​0 0 0 0 0 0 0 0 0 0 0 0 0 0 255
-""".splitlines()
+    expected_str_list = """255 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 128 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 255
+    """.splitlines()
 
     for i in range(3, 6):
         assert ppm_str_list[i] == expected_str_list[i - 3]

@@ -15,27 +15,78 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from color import Color
+import math
 
 
 class Canvas:
     def __init__(self, width, height, **kwargs):
         fill_color = kwargs.get('fill_color', Color(0, 0, 0))
+        self.color_scale = kwargs.get('color_scale', 255)
+        self.ppm_max_char_line = kwargs.get('ppm_max_char_line', 70)
 
         self.width = width
         self.height = height
         self.pixels = []
 
-        self.ppm_str = """P3
-{0} {1}
-255
-""".format(self.width, self.height)
-
-        for x in range(self.width):
+        for y in range(self.height):
             self.pixels.append([])
 
             # pylint: disable=unused-variable
-            for y in range(self.height):
-                self.pixels[x].append(fill_color)
+            for x in range(self.width):
+                self.pixels[y].append(fill_color)
+
+    def _get_rgb_char_list(self, pixel):
+        max_color = self.color_scale
+        rgb = [pixel.red, pixel.green, pixel.blue]
+        rgb_len = len(rgb)
+        char_list = []
+
+        for i in range(rgb_len):
+            adj_color = math.ceil(rgb[i] * max_color)
+            adj_color = max_color if adj_color > max_color else adj_color
+            adj_color = 0 if adj_color < 0 else adj_color
+
+            char_list += list(str(adj_color))
+            char_list.append(' ' if i < (rgb_len - 1) else '')
+
+        return char_list
+
+    def _create_ppm_body(self):
+        max_line = self.ppm_max_char_line
+        ppm_body_str = ''
+
+        for y in range(self.height):
+            pixel_row_char_list = []
+
+            for x in range(self.width):
+                pixel = self.pixel_at(x, y)
+                pixel_row_char_list += self._get_rgb_char_list(pixel)
+                pixel_row_char_list.append(' ' if x < (self.width - 1) else '')
+
+            ind_offset = 0
+            char_ind = 0
+
+            while (ind_offset + char_ind) < len(pixel_row_char_list):
+                if char_ind >= (max_line - 1):
+                    while pixel_row_char_list[ind_offset + char_ind] != ' ':
+                        char_ind -= 1
+
+                    pixel_row_char_list[ind_offset + char_ind] = '\n'
+                    ind_offset += char_ind
+                    char_ind = 0
+
+                char_ind += 1
+
+            pixel_row_char_list.append('\n')
+            ppm_body_str += ''.join(pixel_row_char_list)
+
+        return ppm_body_str
+
+    def _create_ppm_header(self):
+        return """P3
+{0} {1}
+{2}
+""".format(self.width, self.height, self.color_scale)
 
     def _validate_pixel_range(self, x, y):
         if not ((0 <= x < self.width) and (0 <= y < self.height)):
@@ -44,10 +95,13 @@ class Canvas:
     def pixel_at(self, x, y):
         self._validate_pixel_range(x, y)
 
-        return self.pixels[x][y]
+        return self.pixels[y][x]
 
     def to_ppm_str(self):
-        return self.ppm_str
+        ppm_header = self._create_ppm_header()
+        ppm_body = self._create_ppm_body()
+
+        return ppm_header + ppm_body
 
     def to_ppm(self):
         return NotImplemented
@@ -55,4 +109,4 @@ class Canvas:
     def write_pixel(self, x, y, color):
         self._validate_pixel_range(x, y)
 
-        self.pixels[x][y] = color
+        self.pixels[y][x] = color
