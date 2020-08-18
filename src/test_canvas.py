@@ -89,9 +89,6 @@ def test_to_ppm_str_long_lines():
 """.splitlines()
 
     for i in range(3, 7):
-        print('Line {0} actual: \'{1}\' '.format(i, ppm_str_list[i]))
-        print('Line {0} expect: \'{1}\' '.format(i, expected_str_list[i - 3]))
-
         assert ppm_str_list[i] == expected_str_list[i - 3]
 
 

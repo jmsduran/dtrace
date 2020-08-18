@@ -112,10 +112,10 @@ class Canvas:
 
         return ppm_header + ppm_body
 
-    def to_ppm(self):
+    def to_ppm_file(self):
         ppm_str = self.to_ppm_str()
 
-        with open('./', 'w') as ppm_file:
+        with open('./output.ppm', 'w') as ppm_file:
             ppm_file.write(ppm_str)
 
     def write_pixel(self, x, y, color):
