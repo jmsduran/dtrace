@@ -76,16 +76,15 @@ def test_to_ppm_str_metadata():
         assert ppm_str_list[i] == expected_str_list[i]
 
 
-@pytest.mark.skip(reason="Not implemented yet")
 def test_to_ppm_str_long_lines():
     c = Canvas(10, 2, fill_color=Color(1, 0.8, 0.6))
 
     ppm_str = c.to_ppm_str()
     ppm_str_list = ppm_str.splitlines()
 
-    expected_str_list = """255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204​
-153 255 204 153 255 204 153 255 204 153 255 204 153​
-255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204​
+    expected_str_list = """255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
+153 255 204 153 255 204 153 255 204 153 255 204 153
+255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
 153 255 204 153 255 204 153 255 204 153 255 204 153
 """.splitlines()
 

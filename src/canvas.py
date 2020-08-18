@@ -47,7 +47,9 @@ class Canvas:
             adj_color = 0 if adj_color < 0 else adj_color
 
             char_list += list(str(adj_color))
-            char_list.append(' ' if i < (rgb_len - 1) else '')
+
+            if i < (rgb_len - 1):
+                char_list.append(' ')
 
         return char_list
 
@@ -61,7 +63,9 @@ class Canvas:
             for x in range(self.width):
                 pixel = self.pixel_at(x, y)
                 pixel_row_char_list += self._get_rgb_char_list(pixel)
-                pixel_row_char_list.append(' ' if x < (self.width - 1) else '')
+
+                if x < (self.width - 1):
+                    pixel_row_char_list.append(' ')
 
             ind_offset = 0
             char_ind = 0
@@ -75,7 +79,8 @@ class Canvas:
                     ind_offset += char_ind
                     char_ind = 0
 
-                char_ind += 1
+                else:
+                    char_ind += 1
 
             pixel_row_char_list.append('\n')
             ppm_body_str += ''.join(pixel_row_char_list)
