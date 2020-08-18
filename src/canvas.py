@@ -35,6 +35,28 @@ class Canvas:
             for x in range(self.width):
                 self.pixels[y].append(fill_color)
 
+    def _append_space_if_less_than(self, a, b, char_list):
+        if a < b:
+            char_list.append(' ')
+
+    def _format_row_max_line(self, char_list):
+        ind_offset = 0
+        char_ind = 0
+
+        while (ind_offset + char_ind) < len(char_list):
+            if char_ind >= (self.ppm_max_char_line - 1):
+                while char_list[ind_offset + char_ind] != ' ':
+                    char_ind -= 1
+
+                char_list[ind_offset + char_ind] = '\n'
+                ind_offset += char_ind
+                char_ind = 0
+
+            else:
+                char_ind += 1
+
+        char_list.append('\n')
+
     def _get_rgb_char_list(self, pixel):
         max_color = self.color_scale
         rgb = [pixel.red, pixel.green, pixel.blue]
@@ -47,14 +69,11 @@ class Canvas:
             adj_color = 0 if adj_color < 0 else adj_color
 
             char_list += list(str(adj_color))
-
-            if i < (rgb_len - 1):
-                char_list.append(' ')
+            self._append_space_if_less_than(i, rgb_len - 1, char_list)
 
         return char_list
 
     def _create_ppm_body(self):
-        max_line = self.ppm_max_char_line
         ppm_body_str = ''
 
         for y in range(self.height):
@@ -64,25 +83,10 @@ class Canvas:
                 pixel = self.pixel_at(x, y)
                 pixel_row_char_list += self._get_rgb_char_list(pixel)
 
-                if x < (self.width - 1):
-                    pixel_row_char_list.append(' ')
+                self._append_space_if_less_than(x, self.width - 1,
+                                                pixel_row_char_list)
 
-            ind_offset = 0
-            char_ind = 0
-
-            while (ind_offset + char_ind) < len(pixel_row_char_list):
-                if char_ind >= (max_line - 1):
-                    while pixel_row_char_list[ind_offset + char_ind] != ' ':
-                        char_ind -= 1
-
-                    pixel_row_char_list[ind_offset + char_ind] = '\n'
-                    ind_offset += char_ind
-                    char_ind = 0
-
-                else:
-                    char_ind += 1
-
-            pixel_row_char_list.append('\n')
+            self._format_row_max_line(pixel_row_char_list)
             ppm_body_str += ''.join(pixel_row_char_list)
 
         return ppm_body_str
