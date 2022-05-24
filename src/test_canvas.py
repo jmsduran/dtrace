@@ -16,6 +16,7 @@
 
 from canvas import Canvas
 from color import Color
+from tuple import Tuple
 import pytest
 
 
@@ -136,3 +137,36 @@ def test_out_of_bounds_errors():
 
     with pytest.raises(IndexError):
         c.write_pixel(10, 19, Color(0, 0, 0))
+
+
+def test_projectile():
+    width = 900
+    height = 550
+
+    color_black = Color(0, 0, 0)
+    c = Canvas(width, height, fill_color=color_black)
+
+    projectile = Tuple(0, 1, 0, 1)
+
+    v_velocity = Tuple(1, 1.8, 0, 0)
+    v_velocity = v_velocity.normalize()
+    v_velocity *= 11.25
+
+    v_gravity = Tuple(0, -0.1, 0, 0)
+    v_wind = Tuple(-0.01, 0, 0, 0)
+
+    for i in range(0, 198):
+        pixel_color = Color(0, 1, 0)
+        x = round(projectile.x)
+        y = round(projectile.y)
+
+        if (0 <= x <= width) and (0 <= y <= height):
+            c.write_pixel(x, height - y - 1, pixel_color)
+            c.write_pixel(x, height - y - 2, pixel_color)
+            c.write_pixel(x + 1, height - y - 1, pixel_color)
+            c.write_pixel(x + 1, height - y - 2, pixel_color)
+
+        projectile = projectile + v_velocity
+        v_velocity = v_velocity + v_gravity + v_wind
+
+    # c.to_ppm_file()
