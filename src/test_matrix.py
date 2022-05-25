@@ -54,3 +54,24 @@ def test_init():
     _assert_matrix(a, a_data)
     _assert_matrix(b, b_data)
     _assert_matrix(c, c_data)
+
+
+def test_equals():
+    a = Matrix([
+        [-3, 5],
+        [1, -2]
+    ])
+
+    b = Matrix([
+        [-3, 5],
+        [1, -2]
+    ])
+
+    c = Matrix([
+        [-3, 5],
+        [1, -3]
+    ])
+
+    assert a == b
+    assert a != c
+    assert a != 2
