@@ -29,22 +29,46 @@ class Matrix:
 
     def __mul__(self, other):
         # Only supports 4x4 matrix to 1x4 tuple multiplication
-        if isinstance(other, Tuple):
-            b = [other.x, other.y, other.z, other.w]
-            c = [0] * 4
+        if self._is_tuple_mul(other):
+            return self._tuple_mul(other)
 
-            for row in range(0, 4):
-                for col in range(0, 4):
-                    c[row] += (self.at(row, col) * b[col])
-
-            return Tuple(c[0], c[1], c[2], c[3])
-
-        # Only supports matrix multiplication of equal dimensions
-        elif isinstance(other, Matrix):
-            return None
+        # Only supports square matrix multiplication of equal sizes
+        elif self._is_square_matrix_mul(other):
+            return self._square_matrix_mul(other)
 
         else:
             return None
+
+    def _is_tuple_mul(self, other):
+        return (isinstance(other, Tuple) and
+                self.row_len() == 4 and
+                self.col_len() == 4)
+
+    def _tuple_mul(self, other):
+        b = [other.x, other.y, other.z, other.w]
+        c = [0] * 4
+
+        for row in range(0, 4):
+            for col in range(0, 4):
+                c[row] += (self.at(row, col) * b[col])
+
+        return Tuple(c[0], c[1], c[2], c[3])
+
+    def _is_square_matrix_mul(self, other):
+        return (isinstance(other, Matrix) and
+                self.row_len() == other.row_len() and
+                self.col_len() == other.col_len() and
+                self.col_len() == other.row_len())
+
+    def _square_matrix_mul(self, other):
+        c = [[0 for _ in range(4)] for _ in range(4)]
+
+        for row in range(0, self.row_len()):
+            for col in range(0, self.col_len()):
+                for j in range(0, self.col_len()):
+                    c[row][col] += self.at(row, j) * other.at(j, col)
+
+        return Matrix(c)
 
     def equals(self, m):
         for row in range(0, m.row_len()):
