@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from tuple import Tuple
+
 
 class Matrix:
     def __init__(self, data):
@@ -24,6 +26,23 @@ class Matrix:
             return NotImplemented
 
         return self.equals(other)
+
+    def __mul__(self, other):
+        if isinstance(other, Tuple):
+            b = [other.x, other.y, other.z, other.w]
+            c = [0] * 4
+
+            for row in range(0, 4):
+                for col in range(0, 4):
+                    c[row] += (self.at(row, col) * b[col])
+
+            return Tuple(c[0], c[1], c[2], c[3])
+
+        elif isinstance(other, Matrix):
+            return None
+
+        else:
+            return None
 
     def equals(self, m):
         for row in range(0, m.row_len()):

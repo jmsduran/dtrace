@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from tuple import Tuple
 from matrix import Matrix
 
 
@@ -75,3 +76,16 @@ def test_equals():
     assert a == b
     assert a != c
     assert a != 2
+
+
+def test_mul_tuple():
+    a = Matrix([
+        [1, 2, 3, 4],
+        [2, 4, 4, 2],
+        [8, 6, 4, 1],
+        [0, 0, 0, 1]
+    ])
+
+    b = Tuple(1, 2, 3, 1)
+
+    assert (a * b) == Tuple(18, 24, 33, 1)
