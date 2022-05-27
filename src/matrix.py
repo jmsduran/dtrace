@@ -28,6 +28,7 @@ class Matrix:
         return self.equals(other)
 
     def __mul__(self, other):
+        # Only supports 4x4 matrix to 1x4 tuple multiplication
         if isinstance(other, Tuple):
             b = [other.x, other.y, other.z, other.w]
             c = [0] * 4
@@ -38,6 +39,7 @@ class Matrix:
 
             return Tuple(c[0], c[1], c[2], c[3])
 
+        # Only supports matrix multiplication of equal dimensions
         elif isinstance(other, Matrix):
             return None
 
