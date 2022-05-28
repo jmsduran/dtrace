@@ -128,3 +128,11 @@ def test_mul_matrix_identity():
     b = IdentityMatrix(4)
 
     assert (a * b) == a
+
+
+def test_mul_tuple_identity():
+    a = Tuple(1, 2, 3, 4)
+    b = IdentityMatrix(4)
+
+    # (a * b) will throw an exception.
+    assert (b * a) == a
