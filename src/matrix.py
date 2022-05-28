@@ -92,3 +92,11 @@ class Matrix:
 
     def element_count(self):
         return self.col_len() * self.row_len()
+
+
+class IdentityMatrix(Matrix):
+    def __init__(self, size):
+        self.data = [[0 for _ in range(size)] for _ in range(size)]
+
+        for i in range(0, size):
+            self.data[i][i] = 1

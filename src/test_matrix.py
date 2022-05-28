@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from tuple import Tuple
+from matrix import IdentityMatrix
 from matrix import Matrix
 
 
@@ -114,3 +115,16 @@ def test_mul_matrix():
     ])
 
     assert (a * b) == c
+
+
+def test_mul_matrix_identity():
+    a = Matrix([
+        [0, 1, 2, 4],
+        [1, 2, 4, 8],
+        [2, 4, 8, 16],
+        [4, 8, 16, 32]
+    ])
+
+    b = IdentityMatrix(4)
+
+    assert (a * b) == a
