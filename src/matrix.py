@@ -93,6 +93,17 @@ class Matrix:
     def element_count(self):
         return self.col_len() * self.row_len()
 
+    def transpose(self):
+        rows = self.row_len()
+        cols = self.col_len()
+        c = [[0 for _ in range(rows)] for _ in range(cols)]
+
+        for i in range(0, cols):
+            for j in range(0, rows):
+                c[i][j] = self.data[j][i]
+
+        self.data = c
+
 
 class IdentityMatrix(Matrix):
     def __init__(self, size):
