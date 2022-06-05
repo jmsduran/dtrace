@@ -156,3 +156,11 @@ def test_transpose_matrix():
     a.transpose()
 
     assert a == b
+
+
+def test_transpose_identity():
+    a = IdentityMatrix(4)
+    b = IdentityMatrix(4)
+    a.transpose()
+
+    assert a == b
